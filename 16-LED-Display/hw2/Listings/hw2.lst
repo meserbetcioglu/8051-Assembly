@@ -1,0 +1,147 @@
+A51 MACRO ASSEMBLER  HW2                                                                  12/18/2020 01:07:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\hw2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE hw2.a51 SET(SMALL) DEBUG PRINT(.\Listings\hw2.lst) OBJECT(.\Objects\hw2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 000H
+                       2             
+0000                   3             START:
+0000 758000            4                     MOV P0,#00H
+0003 75A000            5                     MOV P2,#00H
+0006 75B000            6                     MOV P3,#00H
+0009 7A00              7                     MOV R2,#0D
+000B 7816              8                     MOV R0,#22D
+000D 8009              9                     SJMP SKIPSTARTDELAY
+000F                  10             LOOP1:
+000F 00               11                     NOP
+0010 00               12                     NOP
+0011 00               13                     NOP
+0012 00               14                     NOP
+0013 00               15                     NOP
+0014 00               16                     NOP
+0015 00               17                     NOP
+0016 0A               18                     INC R2
+0017 0A               19                     INC R2
+0018                  20             SKIPSTARTDELAY:
+0018 7140             21                     ACALL DELAY
+001A 790B             22                     MOV R1,#11D
+001C 75800B           23                     MOV P0,#11D
+001F 900300           24                     MOV DPTR,#300H
+0022                  25             LOOP2:
+0022 EA               26                     MOV A,R2
+0023 93               27                     MOVC A,@A+DPTR
+0024 F5A0             28                     MOV P2,A
+0026 A3               29                     INC DPTR
+0027 EA               30                     MOV A,R2
+0028 93               31                     MOVC A,@A+DPTR
+0029 F5B0             32                     MOV P3,A
+002B A3               33                     INC DPTR
+002C D9F4             34                     DJNZ R1,LOOP2
+002E D8DF             35                     DJNZ R0,LOOP1
+0030 80CE             36                     SJMP START
+                      37                     
+0300                  38     ORG 300H
+0300 00000000         39             DB 00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,
+                             0E1H,87H,0E1H,43H,0E5H,0C4H,0E5H,0C7H,0E1H,43H,0C8H,10H,0E0H,43H,0C8H,13H,0E2H,47H,0E0H,0C7
+                             H,20H,43H,22H,47H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H
+0304 00000000                
+0308 00000000                
+030C 00000000                
+0310 00000000                
+0314 E187E143                
+0318 E5C4E5C7                
+031C E143C810                
+0320 E043C813                
+0324 E247E0C7                
+0328 20432247                
+032C 00000000                
+0330 00000000                
+0334 00000000                
+0338 00000000                
+033C 00000000                
+                      40                     
+A51 MACRO ASSEMBLER  HW2                                                                  12/18/2020 01:07:00 PAGE     2
+
+0340                  41             DELAY:
+0340 715B             42                     ACALL DELAY1
+0342 7168             43                     ACALL DELAY2
+0344 7D0F             44                     MOV R5,#15
+0346 758901           45                     MOV TMOD,#01
+0349                  46             DELAYLOOP:
+0349 758A00           47                     MOV TL0,#0
+034C 758C00           48                     MOV TH0,#0
+034F D28C             49                     SETB TR0
+0351                  50             AGAIN:
+0351 308DFD           51                     JNB TF0, AGAIN
+0354 C28C             52                     CLR TR0
+0356 C28D             53                     CLR TF0
+0358 DDEF             54                     DJNZ R5,DELAYLOOP
+035A 22               55                     RET
+                      56                     
+035B                  57             DELAY1:
+035B 7DAA             58                     MOV R5,#170D
+035D                  59             LABEL1:
+035D 7162             60                     ACALL DEL1
+035F DDFC             61                     DJNZ R5,LABEL1
+0361 22               62                     RET
+0362                  63             DEL1:
+0362 7E1B             64                     MOV R6,#27D
+0364 00               65                     NOP
+0365                  66             DEL1LOOP:
+0365 DEFE             67                     DJNZ R6,DEL1LOOP
+0367 22               68                     RET
+                      69                     
+0368                  70             DELAY2:
+0368 7D7F             71                     MOV R5,#127D
+036A                  72             LABEL2:
+036A 716F             73                     ACALL DEL2
+036C DDFC             74                     DJNZ R5,LABEL2
+036E 22               75                     RET
+036F                  76             DEL2:
+036F 7E17             77                     MOV R6,#23D
+0371                  78             DEL2LOOP:
+0371 DEFE             79                     DJNZ R6,DEL2LOOP
+0373 22               80                     RET
+*** WARNING #A41 IN 80 (hw2.a51, LINE 80): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  HW2                                                                  12/18/2020 01:07:00 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0351H   A   
+DEL1 . . . . . . .  C ADDR   0362H   A   
+DEL1LOOP . . . . .  C ADDR   0365H   A   
+DEL2 . . . . . . .  C ADDR   036FH   A   
+DEL2LOOP . . . . .  C ADDR   0371H   A   
+DELAY. . . . . . .  C ADDR   0340H   A   
+DELAY1 . . . . . .  C ADDR   035BH   A   
+DELAY2 . . . . . .  C ADDR   0368H   A   
+DELAYLOOP. . . . .  C ADDR   0349H   A   
+LABEL1 . . . . . .  C ADDR   035DH   A   
+LABEL2 . . . . . .  C ADDR   036AH   A   
+LOOP1. . . . . . .  C ADDR   000FH   A   
+LOOP2. . . . . . .  C ADDR   0022H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+SKIPSTARTDELAY . .  C ADDR   0018H   A   
+START. . . . . . .  C ADDR   0000H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,89 @@
+A51 MACRO ASSEMBLER  HW3                                                                  12/25/2020 21:49:14 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\hw3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE hw3.a51 SET(SMALL) DEBUG PRINT(.\Listings\hw3.lst) OBJECT(.\Objects\hw3
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 000H
+                       2             
+0000                   3             START:
+0000 759000            4                     MOV P1,#00H
+0003 790C              5                     MOV R1,#12D
+0005 7A0A              6                     MOV R2,#10D
+0007 7B09              7                     MOV R3,#9D
+0009 7C08              8                     MOV R4,#8D
+000B 7D07              9                     MOV R5,#7D
+000D                  10             MAINLOOP:
+000D 112F             11                     ACALL DELAY
+000F D904             12                     DJNZ R1,SKIP1
+0011 B291             13                     CPL P1.1
+0013 790C             14                     MOV R1,#12D
+0015                  15             SKIP1:
+0015 DA04             16                     DJNZ R2,SKIP2
+0017 B292             17                     CPL P1.2
+0019 7A0A             18                     MOV R2,#10D
+001B                  19             SKIP2:
+001B DB04             20                     DJNZ R3,SKIP3
+001D B293             21                     CPL P1.3
+001F 7B09             22                     MOV R3,#9D
+0021                  23             SKIP3:
+0021 DC04             24                     DJNZ R4,SKIP4
+0023 B294             25                     CPL P1.4
+0025 7C08             26                     MOV R4,#8D
+0027                  27             SKIP4:
+0027 DD04             28                     DJNZ R5,SKIP5
+0029 B295             29                     CPL P1.5
+002B 7D07             30                     MOV R5,#7D
+002D                  31             SKIP5:
+002D 80DE             32                     SJMP MAINLOOP
+                      33     
+                      34     
+002F                  35             DELAY:
+002F 7E01             36                     MOV R6,#1
+0031 758901           37                     MOV TMOD,#01H
+0034                  38             DELAYLOOP:
+0034 758AD1           39                     MOV TL0,#209
+0037 758CFE           40                     MOV TH0,#254
+003A D28C             41                     SETB TR0
+003C                  42             AGAIN:
+003C 308DFD           43                     JNB TF0, AGAIN
+003F C28C             44                     CLR TR0
+0041 C28D             45                     CLR TF0
+0043 DEEF             46                     DJNZ R6,DELAYLOOP
+0045 22               47                     RET
+                      48     END
+                                                     
+A51 MACRO ASSEMBLER  HW3                                                                  12/25/2020 21:49:14 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   003CH   A   
+DELAY. . . . . . .  C ADDR   002FH   A   
+DELAYLOOP. . . . .  C ADDR   0034H   A   
+MAINLOOP . . . . .  C ADDR   000DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+SKIP1. . . . . . .  C ADDR   0015H   A   
+SKIP2. . . . . . .  C ADDR   001BH   A   
+SKIP3. . . . . . .  C ADDR   0021H   A   
+SKIP4. . . . . . .  C ADDR   0027H   A   
+SKIP5. . . . . . .  C ADDR   002DH   A   
+START. . . . . . .  C ADDR   0000H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
